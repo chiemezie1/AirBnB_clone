@@ -7,6 +7,7 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """Command Line Interpreter for AirBnB Clone"""
     prompt = "(hbnb) "
+    intro = "WElcome !! Command Line Interpreter for AirBnB Clone"
     cmd = cmd.Cmd()
 
     def do_quit(self, arg):
