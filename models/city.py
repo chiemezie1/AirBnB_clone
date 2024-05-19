@@ -16,9 +16,9 @@ class City(BaseModel):
         state_id (str): state id
         name (str): city name
     """
-    state_id = ""
-    name = ""
 
     def __init__(self, *args, **kwargs):
         """Constructor for City Class """
+        self.state_id = ""
+        self.name = ""
         super().__init__(*args, **kwargs)

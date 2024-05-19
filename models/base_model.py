@@ -22,7 +22,13 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """Constructor method"""
+        """
+        Constructor method
+
+        Args:
+            *args: variable length argument list
+            **kwargs: variable length keyword argument list
+        """
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":

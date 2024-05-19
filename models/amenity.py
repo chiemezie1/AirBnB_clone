@@ -15,8 +15,8 @@ class Amenity(BaseModel):
     Attributes:
             name (str): amenity name
     """
-    name = ""
 
     def __init__(self, *args, **kwargs):
         """Constructor for Amenity Class """
+        self.name = ""
         super().__init__(*args, **kwargs)
