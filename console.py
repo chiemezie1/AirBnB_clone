@@ -28,7 +28,6 @@ class HBNBCommand(cmd.Cmd):
                 that are parseable by precmd.
     """
     prompt = "(hbnb) "
-    intro = "WElcome !! Command Line Interpreter for AirBnB Clone"
     cmd = cmd.Cmd()
 
     models = {
