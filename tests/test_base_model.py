@@ -8,56 +8,6 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """Test cases for the BaseModel class"""
 
-    def test_instance(self):
-        """Test for BaseModel instance"""
-        instance = BaseModel()
-        self.assertIsInstance(instance, BaseModel)
-
-    def test_id(self):
-        """Test for BaseModel id"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.id, str)
-
-    def test_created_at(self):
-        """Test for BaseModel created_at"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.created_at, datetime)
-
-    def test_updated_at(self):
-        """Test for BaseModel updated_at"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.updated_at, datetime)
-
-    def test_str(self):
-        """Test for BaseModel __str__ method"""
-        instance = BaseModel()
-        self.assertIsInstance(str(instance), str)
-
-    def test_save(self):
-        """Test for BaseModel save method"""
-        instance = BaseModel()
-        updated_at = instance.updated_at
-        instance.save()
-        self.assertNotEqual(updated_at, instance.updated_at)
-
-    def test_to_dict(self):
-        """Test for BaseModel to_dict method"""
-        instance = BaseModel()
-        self.assertIsInstance(instance.to_dict(), dict)
-
-    def test_to_dict_class(self):
-        """Test for BaseModel __class__ key in to dict"""
-        instance = BaseModel()
-        self.assertEqual(instance.to_dict()["__class__"], "BaseModel")
-
-#!/usr/bin/python3#
-"""Unittest for BaseModel class"""
-import unittest
-from models.base_model import BaseModel
-from datetime import datetime
-
-
-class TestBaseModel(unittest.TestCase):
     def setUp(self):
         """Set up for the tests"""
         self.model = BaseModel()
@@ -97,11 +47,49 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(format_datetime(time_cr), self.model.created_at)
         self.assertEqual(format_datetime(time_up), self.model.updated_at)
 
+    def test_instance(self):
+        """Test for BaseModel instance"""
+        instance = BaseModel()
+        self.assertIsInstance(instance, BaseModel)
+
+    def test_id(self):
+        """Test for BaseModel id"""
+        instance = BaseModel()
+        self.assertIsInstance(instance.id, str)
+
+    def test_created_at(self):
+        """Test for BaseModel created_at"""
+        instance = BaseModel()
+        self.assertIsInstance(instance.created_at, datetime)
+
+    def test_updated_at(self):
+        """Test for BaseModel updated_at"""
+        instance = BaseModel()
+        self.assertIsInstance(instance.updated_at, datetime)
+
     def test_str(self):
-        """Test the __str__ method"""
-        model_str = str(self.model)
-        expected_str = f"[BaseModel] ({self.model.id}) {self.model.__dict__}"
-        self.assertEqual(model_str, expected_str)
+        """Test for BaseModel __str__ method"""
+        instance = BaseModel()
+        self.assertIsInstance(str(instance), str)
+        expected_str = f"[BaseModel] ({instance.id}) {instance.__dict__}"
+        self.assertEqual(str(instance), expected_str)
+
+    def test_save(self):
+        """Test for BaseModel save method"""
+        instance = BaseModel()
+        updated_at = instance.updated_at
+        instance.save()
+        self.assertNotEqual(updated_at, instance.updated_at)
+
+    def test_to_dict(self):
+        """Test for BaseModel to_dict method"""
+        instance = BaseModel()
+        self.assertIsInstance(instance.to_dict(), dict)
+
+    def test_to_dict_class(self):
+        """Test for BaseModel __class__ key in to dict"""
+        instance = BaseModel()
+        self.assertEqual(instance.to_dict()["__class__"], "BaseModel")
 
     def test_init_kwargs(self):
         """Test initialization with kwargs"""
