@@ -24,7 +24,8 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): command prompt prefix string
         cmd (Cmd): command line interpreter
         models (dict): dictionary of available models
-        parsebale_commands (list): list of commands that are parseable by precmd
+        parsebale_commands (list): list of commands
+                that are parseable by precmd.
     """
     prompt = "(hbnb) "
     intro = "WElcome !! Command Line Interpreter for AirBnB Clone"
@@ -46,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
     ]
 
     def precmd(self, arg):
-        """Pre Command to handle Parseable class.method() (parseable_commands)"""
+        """Pre Command to handle Parseable class.method()"""
         if "." in arg and len(arg.split(".", 1)) == 2 \
                 and arg.split(".", 1)[1].split("(", 1)[0].strip() \
                 in self.parsebale_commands:
@@ -77,7 +78,10 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of Available Models and saves it to JSON file"""
+        """
+        Creates a new instance of Available Models
+            and saves it to JSON file
+        """
         if not arg:
             print("** class name missing **")
         elif arg not in self.models:
@@ -110,9 +114,8 @@ class HBNBCommand(cmd.Cmd):
         if arg not in self.models:
             print("** class doesn't exist **")
         else:
-            for key, value in models.storage.all().items():
-                if arg == key.split(".")[0]:
-                    print(value)
+            print([str(value) for key, value in models.storage.all().items()
+                   if arg in key])
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""

@@ -18,7 +18,8 @@ from models.review import Review
 
 class FileStorage:
     """
-    FileStorage Class that serializes instances to a JSON file and deserializes JSON file to instances
+    FileStorage Class that serializes instances
+        to a JSON file and deserializes JSON file to instances
 
     Attributes:
         __file_path (str): path to the JSON file

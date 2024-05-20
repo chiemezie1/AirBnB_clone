@@ -13,7 +13,8 @@ import models
 
 class BaseModel:
     """
-    BaseModel Class that defines all common attributes/methods for other classes
+    BaseModel Class that defines all common
+        attributes/methods for other classes
 
     Attributes:
         id (str): unique UUID for each instance
@@ -49,15 +50,19 @@ class BaseModel:
         Returns:
             str: BaseModel instance representation
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
-        """Updates the public instance attribute updated_at with the current datetime"""
+        """
+        Updates the public instance attribute
+                updated_at with the current datetime"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Returns a dict ionary containing all keys/values of __dict__ of the instance"""
+        """Returns a dict ionary containing all
+                keys/values of __dict__ of the instance"""
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
