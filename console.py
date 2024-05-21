@@ -2,10 +2,7 @@
 """AirBnB_clone Console Module"""
 
 import cmd
-
-
 import models
-
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -13,16 +10,13 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-
 import json
-
 
 class HBNBCommand(cmd.Cmd):
     """Command Line Interpreter for AirBnB Clone
 
     Attributes:
         prompt (str): command prompt prefix string
-        cmd (Cmd): command line interpreter
         models (dict): dictionary of available models
         parsebale_commands (list): list of commands
                 that are parseable by precmd.
@@ -41,8 +35,10 @@ class HBNBCommand(cmd.Cmd):
     }
 
     parsebale_commands = [
+        "all",
         "destroy",
         "update",
+        "show"
     ]
 
     def precmd(self, arg):
@@ -110,20 +106,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all instances of a class"""
-        class_name = arg.split('.')[0]
-        if class_name in self.models:
-            instances = models.storage.all(self.models[class_name])
-            print(instances)
-        else:
+        if arg and arg not in self.models:
             print("** class doesn't exist **")
-    def do_count(self, arg):
-        """Counts the number of instances of a class"""
-        class_name = arg.split('.')[0]
-        if class_name in self.models:
-            instances = models.storage.all(self.models[class_name])
-            print(len(instances))
-        else:
-            print("** class doesn't exist **")
+            return
+        objects = models.storage.all()
+        obj_list = []
+        for key, value in objects.items():
+            if not arg or key.startswith(arg + "."):
+                obj_list.append(str(value))
+        print(obj_list)
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
