@@ -38,7 +38,8 @@ class HBNBCommand(cmd.Cmd):
         "all",
         "destroy",
         "update",
-        "show"
+        "show",
+        "count"
     ]
 
     def precmd(self, arg):
@@ -86,23 +87,41 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-    def do_show(self, arg):
-        """Prints the string representation of an instance"""
+    def do_count(self, arg):
+        """Retrieves the number of instances of a class"""
         if not arg:
             print("** class name missing **")
+        elif arg not in self.models:
+            print("** class doesn't exist **")
         else:
-            splitted = arg.strip().split()
-            if splitted[0] not in self.models:
-                print("** class doesn't exist **")
-            elif len(splitted) < 2:
-                print("** instance id missing **")
-            else:
-                instance_id = splitted[1]
-                key = "{}.{}".format(splitted[0], instance_id)
-                if key in models.storage.all():
-                    print(models.storage.all()[key])
-                else:
-                    print("** no instance found **")
+            count = 0
+            for key in models.storage.all():
+                if key.startswith(arg + "."):
+                    count += 1
+            print(count)
+
+    def do_show(self, arg):
+        """Prints the string representation of an instance based on class and id"""
+        if not arg:
+            print("** class name missing **")
+            return
+
+        splitted = arg.split()
+        if len(splitted) < 2:
+            print("** instance id missing **")
+            return
+
+        class_name, instance_id = splitted[0], splitted[1].replace("\"", "")
+        if class_name not in self.models:
+            print("** class doesn't exist **")
+            return
+
+        key = "{}.{}".format(class_name, instance_id)
+        obj = models.storage.all().get(key)
+        if obj:
+            print(obj)
+        else:
+            print("** no instance found **")
 
     def do_all(self, arg):
         """Prints all instances of a class"""
